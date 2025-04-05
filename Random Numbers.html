@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user">Welcome to my website</h1>
+            
+
+
+        <p id="decreaseBtn">
+        <p id="resetBtn">
+        <p id="increaseBtn">
+
+
+    <p id="but"></p>
+
+    <label for="min">Minumum Number:</label>
+    <input id="min" type="number" value="1">
+    </b><br><br>
+
+    <label for="max">Maximum Number:</label>
+    <input id="max" type="number" value="10">
+    </b><br><br>
+
+<label for="numRolls">How many rolls do you want?</label>
+<input id="numRolls" type="number" min="1" value="1"><br>
+<p><b>⚠️Warning: A very large amount or rolls could take a very long time to load, or potentially crash the website for you⚠️</b></p>
+
+<button id="roll" class="boton-elegante">Roll</button><br><br>
+
+<div id="results"></div> <!-- Container for dynamically created labels -->
+
+
+
+        <script>
+            const roll = document.getElementById('roll');
+const resultsContainer = document.getElementById('results');
+
+roll.onclick = function() {
+    const min = Number(document.getElementById('min').value);
+    const max = Number(document.getElementById('max').value);
+    const numRolls = Number(document.getElementById('numRolls').value);
+
+    // Check for valid input
+    if (isNaN(min) || isNaN(max) || min >= max) {
+        alert('Please enter valid numbers where Min is less than Max.');
+        return;
+    }
+    if (isNaN(numRolls) || numRolls <= 0) {
+        alert('Please enter a valid number of rolls.');
+        return;
+    }
+
+    // Clear previous results
+    resultsContainer.innerHTML = '';
+
+    // Generate and display random numbers
+    for (let i = 0; i < numRolls; i++) {
+        const randomNum = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        // Create a new label for each roll
+        const newLabel = document.createElement('label');
+        newLabel.textContent = `Roll ${i + 1}: ${randomNum}`;
+        newLabel.className = 'myLabels';
+        resultsContainer.appendChild(newLabel);
+        resultsContainer.appendChild(document.createElement('br'));
+    }
+};
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+        </script>
+        <script src="header.js"></script>
+        <footer id="footer">
+            <hr>
+            &copy; Copyright reserved<br>
+            <small>
+                <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+            </small>
+            <button id="toggle-footer" aria-label="Toggle Footer">
+                ^
+            </button>
+        </footer>
+        <script src="footer.js"></script>
+    </body>
+</html>

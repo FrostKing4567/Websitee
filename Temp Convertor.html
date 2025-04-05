@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user">Welcome to my website</h1>
+            
+
+
+    <form>
+        <h1>Temperature conversion:</h1>
+        <input type="number" id="textBox" value="0"><br>
+
+        <input type="radio" id="CtoF" name="unit">
+        <label for="CtoF">Celsius > Fahrenheit</label><br>
+
+        <input type="radio" id="FtoC" name="unit">
+        <label for="FtoC">Fahrenheit > Celsius</label><br><br>
+
+        <input type="radio" id="CtoK" name="unit">
+        <label for="CtoK">Celsius > Kelvin</label><br>
+
+        <input type="radio" id="FtoK" name="unit">
+        <label for="FtoK">Fahrenheit > Kelvin</label><br><br>
+
+        <input type="radio" id="KtoC" name="unit">
+        <label for="KtoC">Kelvin > Celsius</label><br>
+
+        <input type="radio" id="KtoF" name="unit">
+        <label for="KtoF">Kelvin > Fahrenheit</label><br><br>
+
+
+        <button type="button" class="boton-elegante" id="tempBtn" onclick="convert()">Submit</button>
+        <p id="result"></p>
+    </form>
+
+
+
+
+
+
+
+        <script>
+const textBox = document.getElementById("textBox");
+const CtoF = document.getElementById("CtoF");
+const FtoC = document.getElementById("FtoC");
+const CtoK = document.getElementById("CtoK");
+const KtoC = document.getElementById("KtoC");
+const FtoK = document.getElementById("FtoK");
+const KtoF = document.getElementById("KtoF");
+const result = document.getElementById("result");
+let temp;
+
+
+function convert(){
+
+    if(CtoF.checked){
+        temp = Number(textBox.value);
+        temp = temp * 9 / 5 + 32;
+        result.textContent = temp.toFixed(1) + "ºF"
+    }
+    else if(FtoC.checked){
+        temp = Number(textBox.value);
+        temp = (temp - 32) * (5/9);
+        result.textContent = temp.toFixed(2) + "ºC"
+    }
+
+
+    else if(CtoK.checked){
+        temp = Number(textBox.value);
+        temp += 273.15;
+        result.textContent = temp.toFixed(2) + "ºK"
+    }
+    else if(FtoK.checked){
+        temp = Number(textBox.value);
+        temp = (temp - 32) * 5/9 + 273.15;
+        result.textContent = temp.toFixed(2) + "ºK"
+    }
+
+
+    else if(KtoC.checked){
+        temp = Number(textBox.value);
+        temp -= 273.15;
+        result.textContent = temp.toFixed(2) + "ºC"
+    }
+    else if(KtoF.checked){
+        temp = Number(textBox.value);
+        temp = (temp - 273.15) * 9/5 + 32;
+        result.textContent = temp.toFixed(2) + "ºF"
+    }
+    else{
+        result.textContent = "Select a unit";
+    }
+
+}
+
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+
+        </script>
+        <script src="header.js"></script>
+        <footer id="footer">
+            <hr>
+            &copy; Copyright reserved<br>
+            <small>
+                <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+            </small>
+            <button id="toggle-footer" aria-label="Toggle Footer">
+                ^
+            </button>
+        </footer>
+        <script src="footer.js"></script>
+    </body>
+</html>

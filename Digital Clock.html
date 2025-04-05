@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #clock-container{
+    display: inline;
+    justify-content: center; 
+    align-items: center;
+    height: 100vh;
+}
+#clock{
+    font-family: monospace;
+    font-size: 6.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(5px);
+    background-color: hsla(0, 0%, 100%, 0.1);
+    width: 100%;
+    text-shadow: 3px 3px 5px hsl(0, 0%, 0%);
+}
+
+@media (max-width: 1006px){
+    #clock{
+        font-size: 6rem;
+    }
+}
+@media (max-width: 928px){
+    #clock{
+        font-size: 5.5rem;
+    }
+}
+@media (max-width: 852px){
+    #clock{
+        font-size: 5rem;
+    }
+}
+@media (max-width: 775px){
+    #clock{
+        font-size: 4.5rem;
+    }
+}
+@media (max-width: 436px){
+    #clock{
+        font-size: 4rem;
+    }
+}
+@media (max-width: 388px){
+    #clock{
+        font-size: 3.5rem;
+    }
+}
+@media (max-width: 340px){
+    #clock{
+        font-size: 3rem;
+    }
+}
+@media (max-width: 291px){
+    #clock{
+        font-size: 2.5rem;
+    }
+}
+@media (max-width: 242px){
+    #clock{
+        font-size: 2rem;
+    }
+}
+@media (max-width: 194px){
+    #clock{
+        font-size: 1.5rem;
+    }
+}
+        </style>
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user">Welcome to my website</h1><br><br><br><br><br><br><br>
+            
+
+            <div id="clock-container">
+                <div id="clock">00:00:00</div>
+            </div>
+
+
+        
+        <script>
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+
+
+        </script>
+        <script src="header.js"></script>
+        
+    <footer id="footer">
+        <hr>
+        &copy; Copyright reserved<br>
+        <small>
+            <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+        </small>
+        <button id="toggle-footer" aria-label="Toggle Footer">
+            ^
+        </button>
+    </footer>
+    <script src="footer.js"></script>
+    <script>
+        function updateClock(){
+
+            const now = new Date();
+            let hours = now.getHours();
+            const meridiem = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12 || 12;
+            hours = hours.toString().padStart(2, 0)
+            const minutes = now.getMinutes().toString().padStart(2, 0);
+            const seconds = now.getSeconds().toString().padStart(2, 0);
+            const timeString = `${hours}:${minutes}:${seconds} ${meridiem}`;
+            document.getElementById("clock").textContent = timeString
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000)
+    </script>
+    </body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user">Welcome to my website</h1>
+            
+
+
+
+    <input type="checkbox" id="cb">
+    <label for="cb">Subscribe</label><br>
+
+
+    <input type="radio" id="visaBtn" name="card" class="btnss">
+    <label for="visaBtn">Visa</label><br>
+    <input type="radio" id="MCBtn" name="card" class="btnss">
+    <label for="MCBtn">Master Card</label><br>
+    <input type="radio" id="paypalBtn" name="card" class="btnss">
+    <label for="paypalBtn">Paypal</label><br><br>
+
+
+    <button type="submit" id="mySubmit" class="boton-elegante">Submit</button>
+
+    <p id="subResult"></p>
+    <p id="paymentResult"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer id="footer">
+        <hr>
+        &copy; Copyright reserved<br>
+        <small>
+            <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+        </small>
+        <button id="toggle-footer" aria-label="Toggle Footer">
+            ^
+        </button>
+    </footer>
+    <script src="footer.js"></script>
+        
+        <script>
+            const cb = document.getElementById("cb");
+const visaBtn = document.getElementById("visaBtn");
+const MCBtn = document.getElementById("MCBtn");
+const paypalBtn = document.getElementById("paypalBtn");
+const mySubmit = document.getElementById("mySubmit");
+const subResult = document.getElementById("subResult");
+const paymentResult = document.getElementById("paymentResult");
+
+mySubmit.onclick = function(){
+    if(cb.checked){
+        subResult.textContent = `You are subscribed!`;
+    }
+    else{
+        subResult.textContent = `You are NOT subscribed!`;
+    }
+
+    while(cb.checked){
+    if(visaBtn.checked){
+        paymentResult.textContent = `You are paying with Visa`;
+        return
+    }
+    if(MCBtn.checked){
+        paymentResult.textContent = `You are paying with Master Card`;
+        return
+    }
+    if(paypalBtn.checked){
+        paymentResult.textContent = `You are paying with PayPal`;
+        return
+    }
+    else{
+        subResult.textContent = ``;
+        paymentResult.textContent = `Please select a payment method!`;
+        return
+    }
+
+}
+    if(!cb.checked){
+        if(visaBtn.checked){
+            paymentResult.textContent = ``;
+            return
+        }
+        if(MCBtn.checked){
+            paymentResult.textContent = ``;
+            return
+        }
+        if(paypalBtn.checked){
+            paymentResult.textContent = ``;
+            return
+        }
+        
+
+        if(!visaBtn.checked){
+            paymentResult.textContent = ``;
+            subResult.textContent = `You didn't even select anything.. fyw me to do`;
+            return
+        }
+        if(!MCBtn.checked){
+            paymentResult.textContent = ``;
+            subResult.textContent = `You didn't even select anything.. fyw me to do`;
+            return
+        }
+        if(!paypalBtn.checked){
+            paymentResult.textContent = ``;
+            subResult.textContent = `You didn't even select anything.. fyw me to do`;
+            return
+        }
+}
+    
+}
+
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+
+
+        </script>
+        <script src="header.js"></script>
+    </body>
+</html>

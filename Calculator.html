@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user">Welcome to my website</h1><br><br><br><br>
+            
+    <div id="body">
+    <div id="calculator">
+            <input id="display" readonly>
+            <div id="keys">
+                <button id="buttonn" onclick="appendToDisplay('+')" class="operator-btn">+</button>
+                <button class="buttonn" onclick="appendToDisplay('7')">7</button>
+                <button class="buttonn" onclick="appendToDisplay('8')">8</button>
+                <button class="buttonn" onclick="appendToDisplay('9')">9</button>
+                <button id="buttonn" onclick="appendToDisplay('-')" class="operator-btn">-</button>
+                <button class="buttonn" onclick="appendToDisplay('4')">4</button>
+                <button class="buttonn" onclick="appendToDisplay('5')">5</button>
+                <button class="buttonn" onclick="appendToDisplay('6')">6</button>
+                <button id="buttonn" onclick="appendToDisplay('*')" class="operator-btn">*</button>
+                <button class="buttonn" onclick="appendToDisplay('1')">1</button>
+                <button class="buttonn" onclick="appendToDisplay('2')">2</button>
+                <button class="buttonn" onclick="appendToDisplay('3')">3</button>
+                <button id="buttonn" onclick="appendToDisplay('/')" class="operator-btn">/</button>
+                <button class="buttonn" onclick="appendToDisplay('0')">0</button>
+                <button class="buttonn" onclick="appendToDisplay('.')">.</button>
+                <button class="buttonn" onclick="calculate()">=</button>
+                <button id="buttonn" onclick="clearDisplay()" class="operator-btn">C</button>
+            </div>
+            </div>
+        </div>
+
+
+
+        <style>
+            
+            
+#body{
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 50vh !important;
+    zoom: 0.8;
+}
+
+#calculator{
+    font-family: Arial, sans-serif !important;
+    border-radius: 15px !important;
+    max-width: 500px !important;
+    overflow: hidden !important;
+    background-color: rgba(43, 48, 41, 0.164);
+    backdrop-filter: blur(90px);
+}
+#display {
+    overflow: auto; /* Changed from 'scroll' to 'auto' to only show scrollbars when necessary */
+    width: 100%; /* Ensures the display takes up the full width of its container */
+    padding: 20px;
+    font-size: 5rem;
+    text-align: right; /* Aligns numbers to the right */
+    border: none;
+    background-color: rgba(255, 255, 255, 0.007);
+    color: white;
+    box-sizing: border-box;
+    backdrop-filter: blur(99px);
+}
+#keys{
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 10px !important;
+    padding: 25px !important;
+}
+.buttonn{
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50px !important;
+    border: none !important;
+    background-color: hsl(0, 0%, 30%) !important;
+    color: white !important;
+    font-size: 3rem !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+}
+.buttonn:hover{
+    background-color: hsl(0, 0%, 40%) !important;
+}
+.buttonn:active{
+    background-color: hsl(0, 0%, 50%) !important;
+}
+
+
+
+#buttonn{
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50px !important;
+    border: none !important;
+    background-color: hsl(35, 100%, 55%) !important;
+    color: white !important;
+    font-size: 3rem !important;
+    font-weight: bold !important;
+    cursor: pointer !important;
+}
+#buttonn:hover{
+    background-color: hsl(35, 100%, 65%) !important;
+}
+#buttonn:active{
+    background-color: hsl(35, 100%, 75%) !important;
+}
+        </style>
+
+        
+        <script>
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+
+
+        </script>
+        <script src="header.js"></script>
+        
+    <footer id="footer">
+        <hr>
+        &copy; Copyright reserved<br>
+        <small>
+            <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+        </small>
+        <button id="toggle-footer" aria-label="Toggle Footer">
+            ^
+        </button>
+    </footer>
+    <script src="footer.js"></script>
+
+
+    <script>
+
+const display = document.getElementById("display");
+
+function appendToDisplay(input){
+    display.value += input;
+}
+
+function clearDisplay(){
+    display.value = "";
+}
+
+function calculate(){
+    try{
+        display.value = eval(display.value);
+    }
+    catch(error){
+        display.value = "Error";
+    }
+}
+
+
+
+function appendNumber(number) {
+            const display = document.getElementById('display');
+            display.innerHTML += number; // Append the number to the display
+            display.scrollTop = display.scrollHeight; // Scroll to the bottom of the display
+}
+
+    </script>
+
+
+    </body>
+</html>
+
+

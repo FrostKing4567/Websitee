@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user">Welcome to my website</h1>
+            
+
+            <h1 id="myH1">Stopwatch</h1>
+
+            <div id="container">
+                <div id="display">
+                    00:00:00:00
+                </div>
+                <div id="controls">
+                    <button id="startBtn" onclick="start()">Start</button>
+                    <button id="stopBtn" onclick="stop()">Stop</button>
+                    <button id="resetBtn" onclick="reset()">Reset</button>
+                </div>
+            </div>
+
+
+        <style>
+            #myH1{
+    font-size: 4rem;
+    font-family: "Arial", sans-serif;
+    color:rgba(245, 245, 245, 0.466)
+}
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border: 5px solid;
+    border-radius: 50px;
+    backdrop-filter: blur(25px);
+}
+#display{
+    font-size: 5rem;
+    font-family: monospace;
+    font-weight: bold;
+    color: hsl(0, 0%, 30%);
+    text-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.75);
+    margin-bottom: 25px;
+}
+#controls button{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 5px;
+    min-width: 125px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.5s ease;
+}
+#startBtn{
+    background-color: hsl(115, 28%, 24%);
+}
+#startBtn:hover{
+    background-color: hsl(115, 100%, 30%);
+}
+#stopBtn{
+    background-color: hsl(9, 33%, 34%);
+}
+#stopBtn:hover{
+    background-color: hsl(10, 90%, 40%);
+}
+#resetBtn{
+    background-color: hsl(205, 41%, 29%);
+}
+#resetBtn:hover{
+    background-color: hsl(205, 90%, 50%);
+}
+        </style>
+
+
+
+
+
+
+
+
+<script>
+    const display = document.getElementById("display");
+    let timer = null;
+    let startTime = 0;
+    let elapsedTime = 0;
+    let isRunning = false;
+
+    function start(){
+
+        if(!isRunning){
+            startTime = Date.now() - elapsedTime;
+            timer = setInterval(update, 10);
+            console.log(timer);
+            isRunning = true;
+        }
+    }
+        function stop(){
+            if(isRunning){
+                clearInterval(timer);
+                elapsedTime = Date.now() - startTime;
+                isRunning = false;
+            }
+    }
+        function reset(){
+                clearInterval(timer);
+                elapsedTime = 0;
+                startTime = 0;
+                display.textContent = `00:00:00:00`
+                isRunning = false;
+    }
+        function update(){
+
+        const currentTime = Date.now();
+        elapsedTime = currentTime - startTime;
+
+        let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+        let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);
+        let seconds = Math.floor(elapsedTime / 1000 % 60);
+        let milliseconds = Math.floor(elapsedTime % 1000 / 10);
+
+        hours = String(hours).padStart(2, "0");
+        minutes = String(minutes).padStart(2, "0");
+        seconds = String(seconds).padStart(2, "0");
+        milliseconds = String(milliseconds).padStart(2, "0");
+
+        display.textContent = `${hours}:${minutes}:${seconds}:${milliseconds}`;
+    }
+</script>
+
+
+
+
+
+
+
+        <script>
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+
+
+        </script>
+        <script src="header.js"></script>
+        
+    <footer id="footer">
+        <hr>
+        &copy; Copyright reserved<br>
+        <small>
+            <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+        </small>
+        <button id="toggle-footer" aria-label="Toggle Footer">
+            ^
+        </button>
+    </footer>
+    <script src="footer.js"></script>
+    </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <title>Not really my first website</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        form{
+            background-color: white;
+            max-width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px hsla(0, 0%, 0%, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label{
+            font-size: 2em;
+            font-weight: bold;
+        }
+        input{
+            width: 50%;
+            text-align: center;
+            font-size: 2em;
+            border: 2px solid hsl(0, 0%, 90%);
+            border-radius: 5px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        button{
+            background-color: hsl(120, 100%, 40%);
+            color: white;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: hsl(120, 100%, 30%);
+        }
+        #total{
+            font-size: 2em;
+        }
+        #total-amount{
+            color: hsl(120, 100%, 35%);
+            font-weight: bold;
+        }</style>
+    </head>
+    <body id="body-background">
+        <script src="https://kit.fontawesome.com/5d02cbad8d.js" crossorigin="anonymous"></script>
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('header').innerHTML = data);
+        </script>
+            <h1 id="user"></h1>
+            
+
+
+
+
+            <h1>Interest Calculator</h1>
+            <h2>Future value for one amount</h2>
+
+            <form>
+                <label for="principal">Principal Amount:</label>
+                <input type="number" id="principal" value="0">
+        
+                <label for="rate">Interest Rate: </label>
+                <input type="number" id="rate" value="0">
+        
+                <label for="years">Years: </label>
+                <input type="number" id="years" min="0" value="0">
+        
+                <button type="button" id="compbutton" class="boton-elegante" onclick="calculate()">Submit</button>
+        
+                <p id="total">Total: <span id="total-amount">$0.00</span></p>
+            </form>
+        
+        </body>
+        </html>
+        
+
+            
+
+
+
+        
+        <script>
+window.onload = function() {
+    let storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+        document.getElementById("user").textContent = `Hello, ${storedUsername}!`;
+    } else {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+    }
+};
+
+// Save the username and update the greeting when the button is clicked
+document.getElementById("but").onclick = function() {
+    let username = document.getElementById("ni").value;
+    if (username === "") {
+        document.getElementById("user").textContent = `Hello, stranger!`;
+        localStorage.removeItem('username');
+    } else {
+        document.getElementById("user").textContent = `Hello, ${username}!`;
+        localStorage.setItem('username', username);
+    }
+};
+
+
+        </script>
+        <script src="header.js"></script>
+        
+    <footer id="footer">
+        <hr>
+        &copy; Copyright reserved<br>
+        <small>
+            <a href="mailto:mohamedayman1463@gmail.com">mohamedayman1463@gmail.com <i class="fa-regular fa-envelope fa-1x"></i></a>
+        </small>
+        <button id="toggle-footer" aria-label="Toggle Footer">
+            ^
+        </button>
+    </footer>
+    <script src="footer.js"></script>
+
+    <script>
+        function calculate(){
+
+            const totalAmount = document.getElementById("total-amount");
+            const principalInput = document.getElementById("principal");
+            const rateInput = document.getElementById("rate");
+            const yearsInput = document.getElementById("years");
+
+            let principal = Number(principalInput.value);
+            let rate = Number(rateInput.value / 100);
+            let years = Number(yearsInput.value);
+
+            if(principal < 0 || isNaN(principal)){
+                principal = 0;
+                principalInput.value = 0;
+            }
+            if(rate < 0 || isNaN(rate)){
+                rate = 0;
+                rateInput.value = 0;
+            }
+            if(years < 0 || isNaN(years)){
+                years = 0;
+                yearsInput.value = 0;
+            }
+
+            const result = principal * Math.pow((1 + rate / 1), 1 * years)
+
+            totalAmount.textContent = result.toLocaleString("en-US", {style: "currency", currency: "USD"});
+        }
+    </script>
+
+    </body>
+</html>

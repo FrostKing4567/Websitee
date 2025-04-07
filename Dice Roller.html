@@ -36,12 +36,12 @@
             for(let i = 0; i < numOfDice; i++){
                 const value = Math.floor(Math.random() * 6) + 1;
                 values.push(value);
-                const sum = values.reduce((acc, val) => acc + val, 0);
                 images.push(`<img src="dice_images/${value}.png">`);
             }
-            diceResult.textContent = `Sum: ${sum}`;
-            diceImages.innerHTML = images.join('')
-        }
+    const sum = values.reduce((acc, val) => acc + val, 0);
+    diceResult.textContent = `Sum: ${sum}`;
+    diceImages.innerHTML = images.join('');
+}
     </script>
     <script src="header.js"></script>
     <footer id="footer">

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sleeper Build Program - Mohamed</title>
   <style>
     :root {
@@ -25,9 +25,7 @@
       border-radius: 20px;
       box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
-    h1, h2, h3 {
-      color: var(--accent);
-    }
+    h1, h2, h3 { color: var(--accent); }
     .day {
       margin-bottom: 40px;
       padding: 20px;
@@ -50,7 +48,7 @@
     .progress {
       height: 100%;
       background-color: var(--neon);
-      width: 0%;
+      width: 0;
       transition: width 1s ease-in-out;
     }
     ul { padding-left: 20px; }
@@ -82,6 +80,33 @@
       50% { transform: scale(1.1); }
       100% { transform: scale(1); }
     }
+    .info-btn {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+    .detail-box {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 80%;
+      background: #333;
+      color: #ddd;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 10px var(--neon);
+      z-index: 10000;
+    }
     #streakTracker {
       text-align: center;
       margin-bottom: 20px;
@@ -93,89 +118,137 @@
 <body onload="initApp()">
   <div class="floating-btns">
     <button class="icon-btn" onclick="goToToday()">★</button>
-  </div>  <div class="container">
+  </div>
+  <div id="detailBox" class="detail-box" onclick="this.style.display='none'"></div>  <div class="container">
     <h1>Sleeper Build Workout Plan</h1>
     <div id="streakTracker">Workout streak: <span id="streakCount">0</span> days</div><h2>Warm-up</h2>
 <ul>
-  <li>Jumping Jacks – 2x30 sec</li>
-  <li>Arm Circles – 2x20</li>
-  <li>Bodyweight Squats – 2x15</li>
-  <li>Hip Flexor Stretch – 30 sec/side</li>
+  <li>Jumping Jacks – 2x30 sec <button class="info-btn" onclick="toggleDetail('jumpingjacks')">i</button></li>
+  <li>Arm Circles – 2x20 <button class="info-btn" onclick="toggleDetail('armcircles')">i</button></li>
+  <li>Bodyweight Squats – 2x15 <button class="info-btn" onclick="toggleDetail('bodyweightsquats')">i</button></li>
+  <li>Hip Flexor Stretch – 30 sec/side <button class="info-btn" onclick="toggleDetail('hipflexorstretch')">i</button></li>
 </ul>
 
 <h2>Workout Plan</h2>
 <div class="day" id="sunday">
   <h3>Sunday – Chest & Arms</h3>
   <ul>
-    <li>Push-ups – 3x20</li>
-    <li>Diamond Push-ups – 3x12</li>
-    <li>Chest Fly (band) – 3x15</li>
-    <li>Bicep Curls – 4x15</li>
-    <li>Hammer Curls – 4x15</li>
+    <li>Push-ups – 3x20 <button class="info-btn" onclick="toggleDetail('pushups')">i</button></li>
+    <li>Diamond Push-ups – 3x12 <button class="info-btn" onclick="toggleDetail('diamondpushups')">i</button></li>
+    <li>Chest Fly (band) – 3x15 <button class="info-btn" onclick="toggleDetail('chestfly')">i</button></li>
+    <li>Bicep Curls – 4x15 <button class="info-btn" onclick="toggleDetail('bicepcurls')">i</button></li>
+    <li>Hammer Curls – 4x15 <button class="info-btn" onclick="toggleDetail('hammercurls')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-sunday"></div></div>
 </div>
+
 <div class="day" id="monday">
   <h3>Monday – Core & Cardio</h3>
   <ul>
-    <li>Mountain Climbers – 3x30 sec</li>
-    <li>V-Ups – 3x15</li>
-    <li>Plank Twists – 3x20</li>
-    <li>Oblique Crunch – 3x20 each side</li>
-    <li>10 min HIIT</li>
+    <li>Mountain Climbers – 3x30 sec <button class="info-btn" onclick="toggleDetail('mountainclimbers')">i</button></li>
+    <li>V-Ups – 3x15 <button class="info-btn" onclick="toggleDetail('vups')">i</button></li>
+    <li>Plank Twists – 3x20 <button class="info-btn" onclick="toggleDetail('planktwists')">i</button></li>
+    <li>Oblique Crunch – 3x20 each side <button class="info-btn" onclick="toggleDetail('obliquecrunch')">i</button></li>
+    <li>10 min HIIT <button class="info-btn" onclick="toggleDetail('hiit')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-monday"></div></div>
 </div>
+
 <div class="day" id="tuesday">
   <h3>Tuesday – Pull + Strength</h3>
   <ul>
-    <li>Resistance Band Rows – 4x15</li>
-    <li>Reverse Curls – 4x12</li>
-    <li>Plank to Push-up – 3x12</li>
-    <li>Farmer's Hold – 2x1 min</li>
+    <li>Resistance Band Rows – 4x15 <button class="info-btn" onclick="toggleDetail('bandrows')">i</button></li>
+    <li>Reverse Curls – 4x12 <button class="info-btn" onclick="toggleDetail('reversecurls')">i</button></li>
+    <li>Plank to Push-up – 3x12 <button class="info-btn" onclick="toggleDetail('planktopushup')">i</button></li>
+    <li>Farmer's Hold – 2x1 min <button class="info-btn" onclick="toggleDetail('farmershold')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-tuesday"></div></div>
 </div>
+
 <div class="day" id="wednesday">
   <h3>Wednesday – Waist Focus</h3>
   <ul>
-    <li>Leg Raises – 3x15</li>
-    <li>Plank Dips – 3x20</li>
-    <li>Russian Twists – 4x20</li>
-    <li>Stomach Vacuums – 3x30 sec</li>
+    <li>Leg Raises – 3x15 <button class="info-btn" onclick="toggleDetail('legraises')">i</button></li>
+    <li>Plank Dips – 3x20 <button class="info-btn" onclick="toggleDetail('plankdips')">i</button></li>
+    <li>Russian Twists – 4x20 <button class="info-btn" onclick="toggleDetail('russiantwists')">i</button></li>
+    <li>Stomach Vacuums – 3x30 sec <button class="info-btn" onclick="toggleDetail('stomachvacuums')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-wednesday"></div></div>
 </div>
+
 <div class="day" id="thursday">
   <h3>Thursday – Upper Body</h3>
   <ul>
-    <li>Incline Push-ups – 4x15</li>
-    <li>Chin-ups – 3x8</li>
-    <li>Side Raises – 3x15</li>
-    <li>Forearm Rotations – 3x20</li>
-    <li>Plank – 2x1 min</li>
+    <li>Incline Push-ups – 4x15 <button class="info-btn" onclick="toggleDetail('inclinepushups')">i</button></li>
+    <li>Chin-ups – 3x8 <button class="info-btn" onclick="toggleDetail('chinups')">i</button></li>
+    <li>Side Raises – 3x15 <button class="info-btn" onclick="toggleDetail('sideraises')">i</button></li>
+    <li>Forearm Rotations – 3x20 <button class="info-btn" onclick="toggleDetail('forearmrotations')">i</button></li>
+    <li>Plank – 2x1 min <button class="info-btn" onclick="toggleDetail('plank')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-thursday"></div></div>
 </div>
+
 <div class="day" id="friday">
   <h3>Friday – Cardio & Mobility</h3>
   <ul>
-    <li>Jog – 15–20 min</li>
-    <li>Yoga – 10 min</li>
-    <li>Full-body stretches</li>
+    <li>Jog – 15–20 min <button class="info-btn" onclick="toggleDetail('jog')">i</button></li>
+    <li>Yoga – 10 min <button class="info-btn" onclick="toggleDetail('yoga')">i</button></li>
+    <li>Full-body Stretches <button class="info-btn" onclick="toggleDetail('stretches')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-friday"></div></div>
 </div>
+
 <div class="day" id="saturday">
   <h3>Saturday – Rest</h3>
   <ul>
-    <li>Breathing Exercises – 3 min</li>
-    <li>Foam Rolling or Light Stretching</li>
+    <li>Breathing Exercises – 3 min <button class="info-btn" onclick="toggleDetail('breathing')">i</button></li>
+    <li>Foam Rolling or Light Stretching <button class="info-btn" onclick="toggleDetail('foamrolling')">i</button></li>
   </ul>
   <div class="progress-bar"><div class="progress" id="progress-saturday"></div></div>
 </div>
 
   </div>  <script>
+    const details = {
+      jumpingjacks: "Stand upright with feet together and arms at sides. Jump feet out to shoulder-width while raising arms overhead. Jump back to start.",
+      armcircles: "Extend arms to sides at shoulder height and make small circles forward, then reverse direction.",
+      bodyweightsquats: "Stand shoulder-width, squat by bending knees and pushing hips back, keep chest up, then return to standing.",
+      hipflexorstretch: "Step one foot forward, lower back knee to ground, push hips forward to stretch front of hip.",
+      pushups: "Place hands shoulder-width under shoulders, keep body straight from head to heels, lower chest to floor, push back up.",
+      diamondpushups: "Bring hands together under chest, form diamond shape, perform push-up targeting triceps.",
+      chestfly: "Secure band at chest height, hold handles with arms extended, open arms wide, bring hands together in front of chest.",
+      bicepcurls: "Hold weight with palms up, elbows fixed, curl weight up by contracting biceps, lower slowly.",
+      hammercurls: "Curl with palms facing inward to target brachioradialis and forearms.",
+      mountainclimbers: "In plank position, bring one knee at a time quickly toward chest, alternating legs.",
+      vups: "Lie on back, raise legs and torso simultaneously to meet in a V shape.",
+      planktwists: "Hold forearm plank, twist hips side to side, tapping ground lightly.",
+      obliquecrunch: "Lie on side, crunch elbow to opposite knee to target obliques.",
+      hiit: "Alternate 30 seconds of intense exercise with 30 seconds rest for 10 minutes.",
+      bandrows: "Anchor band at chest height, pull handles to ribcage, squeeze shoulder blades, release controlled.",
+      reversecurls: "Hold weight palms-down, curl up focusing on forearms, lower slowly.",
+      planktopushup: "Move between elbow plank and full push-up position, one arm at a time.",
+      farmershold: "Hold weights at sides, stand tall with shoulders back, engage core and hold.",
+      legraises: "Lie on back, lift legs up to 90° without swinging, lower under control.",
+      plankdips: "In forearm plank, dip hips side to side touching floor lightly.",
+      russiantwists: "Sit with knees bent, lean back, rotate torso side to side tapping floor.",
+      stomachvacuums: "Stand or kneel, exhale fully, pull belly button toward spine and hold.",
+      inclinepushups: "Hands on elevated surface, body straight, lower chest, push up.",
+      chinups: "Underhand grip, pull chin above bar, lower slowly, use assistance if needed.",
+      sideraises: "Raise dumbbells to shoulder height with slight elbow bend.",
+      forearmrotations: "Rotate wrists slowly clockwise and counterclockwise while holding light weights.",
+      plank: "Support on forearms and toes, keep body in straight line, brace core.",
+      jog: "Maintain light, steady pace to keep heart rate elevated without fatigue.",
+      yoga: "Flow through Downward Dog, Upward Dog, Warrior II, Child’s Pose for mobility and stretch.",
+      stretches: "Hamstring, quad, shoulder, chest opener, spinal twist—hold each for 30 sec.",
+      breathing: "Inhale 4s, hold 4s, exhale 4s, repeat for relaxation.",
+      foamrolling: "Roll calves, quads, back slowly over tight spots to release tension."
+    };
+
+    function toggleDetail(id) {
+      const box = document.getElementById('detailBox');
+      box.textContent = details[id] || '';
+      box.style.display = 'block';
+    }
+
     function goToToday() {
       const days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
       const today = new Date().getDay();
@@ -194,7 +267,7 @@
     }
 
     function loadStreak() {
-      let streak = localStorage.getItem('workoutStreak') || 0;
+      const streak = localStorage.getItem('workoutStreak') || 0;
       document.getElementById('streakCount').textContent = streak;
     }
 

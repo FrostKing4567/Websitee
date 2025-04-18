@@ -1,0 +1,206 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sleeper Build Program - Mohamed</title>
+  <style>
+    :root {
+      --bg-dark: #121212;
+      --text-dark: #ddd;
+      --accent: #00796b;
+      --neon: #00ffe0;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background-color: #1e1e1e;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    h1, h2, h3 {
+      color: var(--accent);
+    }
+    .day {
+      margin-bottom: 40px;
+      padding: 20px;
+      border-radius: 20px;
+      background-color: #2a2a2a;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .today-highlight {
+      box-shadow: 0 0 20px 5px var(--neon);
+      border: 2px solid var(--neon);
+    }
+    .progress-bar {
+      height: 10px;
+      background-color: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    .progress {
+      height: 100%;
+      background-color: var(--neon);
+      width: 0%;
+      transition: width 1s ease-in-out;
+    }
+    ul { padding-left: 20px; }
+    .floating-btns {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+    .icon-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    #streakTracker {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      color: var(--neon);
+    }
+  </style>
+</head>
+<body onload="initApp()">
+  <div class="floating-btns">
+    <button class="icon-btn" onclick="goToToday()">★</button>
+  </div>  <div class="container">
+    <h1>Sleeper Build Workout Plan</h1>
+    <div id="streakTracker">Workout streak: <span id="streakCount">0</span> days</div><h2>Warm-up</h2>
+<ul>
+  <li>Jumping Jacks – 2x30 sec</li>
+  <li>Arm Circles – 2x20</li>
+  <li>Bodyweight Squats – 2x15</li>
+  <li>Hip Flexor Stretch – 30 sec/side</li>
+</ul>
+
+<h2>Workout Plan</h2>
+<div class="day" id="sunday">
+  <h3>Sunday – Chest & Arms</h3>
+  <ul>
+    <li>Push-ups – 3x20</li>
+    <li>Diamond Push-ups – 3x12</li>
+    <li>Chest Fly (band) – 3x15</li>
+    <li>Bicep Curls – 4x15</li>
+    <li>Hammer Curls – 4x15</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-sunday"></div></div>
+</div>
+<div class="day" id="monday">
+  <h3>Monday – Core & Cardio</h3>
+  <ul>
+    <li>Mountain Climbers – 3x30 sec</li>
+    <li>V-Ups – 3x15</li>
+    <li>Plank Twists – 3x20</li>
+    <li>Oblique Crunch – 3x20 each side</li>
+    <li>10 min HIIT</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-monday"></div></div>
+</div>
+<div class="day" id="tuesday">
+  <h3>Tuesday – Pull + Strength</h3>
+  <ul>
+    <li>Resistance Band Rows – 4x15</li>
+    <li>Reverse Curls – 4x12</li>
+    <li>Plank to Push-up – 3x12</li>
+    <li>Farmer's Hold – 2x1 min</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-tuesday"></div></div>
+</div>
+<div class="day" id="wednesday">
+  <h3>Wednesday – Waist Focus</h3>
+  <ul>
+    <li>Leg Raises – 3x15</li>
+    <li>Plank Dips – 3x20</li>
+    <li>Russian Twists – 4x20</li>
+    <li>Stomach Vacuums – 3x30 sec</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-wednesday"></div></div>
+</div>
+<div class="day" id="thursday">
+  <h3>Thursday – Upper Body</h3>
+  <ul>
+    <li>Incline Push-ups – 4x15</li>
+    <li>Chin-ups – 3x8</li>
+    <li>Side Raises – 3x15</li>
+    <li>Forearm Rotations – 3x20</li>
+    <li>Plank – 2x1 min</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-thursday"></div></div>
+</div>
+<div class="day" id="friday">
+  <h3>Friday – Cardio & Mobility</h3>
+  <ul>
+    <li>Jog – 15–20 min</li>
+    <li>Yoga – 10 min</li>
+    <li>Full-body stretches</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-friday"></div></div>
+</div>
+<div class="day" id="saturday">
+  <h3>Saturday – Rest</h3>
+  <ul>
+    <li>Breathing Exercises – 3 min</li>
+    <li>Foam Rolling or Light Stretching</li>
+  </ul>
+  <div class="progress-bar"><div class="progress" id="progress-saturday"></div></div>
+</div>
+
+  </div>  <script>
+    function goToToday() {
+      const days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+      const today = new Date().getDay();
+      const el = document.getElementById(days[today]);
+      const top = el.getBoundingClientRect().top + window.scrollY - (window.innerHeight / 2) + (el.offsetHeight / 2);
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+
+    function highlightToday() {
+      const days = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+      const today = new Date().getDay();
+      const el = document.getElementById(days[today]);
+      el.classList.add('today-highlight');
+      const progress = el.querySelector('.progress');
+      if (progress) progress.style.width = '100%';
+    }
+
+    function loadStreak() {
+      let streak = localStorage.getItem('workoutStreak') || 0;
+      document.getElementById('streakCount').textContent = streak;
+    }
+
+    function initApp() {
+      highlightToday();
+      loadStreak();
+    }
+  </script></body>
+</html>
